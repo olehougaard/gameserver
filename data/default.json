@@ -1,0 +1,11 @@
+{
+  "users": [
+    { 
+      "username": "admin",
+      "password": "secret",
+      "id" : 0,
+      "admin": true 
+    }
+  ],
+  "games": []
+}
