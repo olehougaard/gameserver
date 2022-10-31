@@ -83,7 +83,7 @@ app.post('/login', (req, res) => {
   if (user) {
     const token = crypto.randomBytes(16).toString('hex')
     sessions.set(token, user.id)
-    res.send({token})
+    res.send({token, userId: user.id})
   } else {
     res.sendStatus(403)
   }
@@ -154,7 +154,7 @@ app.get('/games/:id', (req, res) => {
     const game = db.game(id)
     if (!game)
       res.sendStatus(404)
-    else if (game.user.id !== user.id)
+    else if (game.user !== user.id)
       res.sendStatus(403)
     else {
       res.send(game)
@@ -168,7 +168,7 @@ app.patch('/games/:id', (req, res) => {
     const game = db.game(id)
     if (!game)
       res.sendStatus(404)
-    else if (game.user.id !== user.id)
+    else if (game.user !== user.id)
       res.sendStatus(403)
     else {
       db.updateGame({ ...game, ...req.body, user: game.user, id })
