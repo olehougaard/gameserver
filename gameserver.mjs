@@ -90,7 +90,7 @@ app.post('/login', (req, res) => {
 })
 
 app.post('/logout', (req, res) => {
-  if (req.query.token && sessions.get(req.query.token)) {
+  if (req.query.token && sessions.get(req.query.token) !== undefined) {
     sessions.delete(req.query.token)
     res.sendStatus(200)
   } else {
